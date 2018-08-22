@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  </head>
+  <body>
+ <form id="defaultDayForm"  target="_blank" onsubmit='return handleSubmit();'>
+ <div class="firstBox">
+    <h3>Let's get that Default Day Started!</h3>
+    <p>Please enter your normal start time and end times.  After you start the process, this box will then rerun the "Add Time" script for you.</p>
+    
+   
+    <label for="startPerm">Enter your default start time</label>
+    <input id="startPerm" type="time" name="startPerm" value="--:-- --">
+    <br>
+    <br>
+    <label for="endPerm">Enter your default end time</label>
+    <input id="endPerm" type="time" name="endPerm" value="--:-- --">
+    <br>
+    <br>
+    <input type="button" class="blue update" name="goTime" value="#TrustTheProcess" onclick="google.script.run.defaultDayRun(defaultDayForm)" />
+    <input type="button" class="grey cancel" name="cancel" value="Cancel" onclick="google.script.host.close()" />
+  </div>
+</form>
+
+
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+</body> 
+</html>
