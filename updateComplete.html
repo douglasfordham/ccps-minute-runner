@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  </head>
+  <body>
+  <form  target="_blank" onsubmit='return handleSubmit();'>
+  <div class="firstBox">
+  <p><b>Update Complete.</b></p>
+  <br>
+  <br>
+  <input type="button" class="closeThis" name="closeThis" value="Done" onclick="google.script.host.close()" />
+  </div>
+  </form>
+
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body> 
+</html>
