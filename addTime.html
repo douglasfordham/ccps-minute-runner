@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  </head>
+  <body onload="setPageValues()">
+  <form id="addTimeForm" target="_blank" onsubmit='return handleSubmit();'>
+  <div class="firstBox">
+    
+    <script>
+    function setPageValues () {
+      google.script.run.withSuccessHandler(disp).getValuesFromSS("E2:E3");
+    }
+
+    function disp(values){
+      document.getElementById("startPerm").innerHTML = values[0][0];
+      document.getElementById("endPerm").innerHTML = values[1][0];
+    }
+  </script>
+  
+  <div class="my-class">  
+  <table style="width:100%">
+  <tr>
+    <td><span>Hide the previous rows?</span></td>
+    <td><label class="switch">
+      <input name = "hidethemrows" type="checkbox">
+      <span class="slider round"></span>
+    </label></td> 
+  </tr>
+  <tr>
+    <td><span>Enable full-day?</span></td>
+    <td> <label class="switch">
+      <input type="checkbox" onclick="runFullDay()">
+      <span class="slider round"></span>
+    </label> </td> 
+  </tr>
+  </table>   
+    <!--If the user does NOT setup a full-day run, then this is what will normally be run.
+        Biggest difference is removing start & end times-->
+    <div id="normalRun" style="display:block;">
+    <p>Please enter the time you wish to run the sheet for, then the date.  Click the blue button to run the script, or cancel to exit.</p>
+    <br>
+    <label for="startTime">Choose a start time: </label>
+    <input id="startTime" type="time" name="startTime" value="--:-- --">
+    <br>
+    <br>
+    <label for="endTime">Choose an end time:  </label>
+    <input id="endTime" type="time" name="endTime" value="--:-- --">
+    <br>
+    </div>
+    
+    <!--If the user selects to run a full-day and it's their first time, then this block will appear.-->
+    <div class ="fullDay" id="fullDayRunFirstTime" style="display:none; background-color:#153b77">
+    <p> You have selected to run a full day, nice! It looks like you have never done this before, so
+    let's set this up.  After this you should only have to set the date.</p>
+    <br>
+    <br>
+    <input type="button" class="blue update" name="goTime" value="Set This UP!" onclick="google.script.run.defaultday()" />
+    <br>
+    </div>
+    
+    <!--If the user selects to run a full-day and it is all set up, then this block will appear.-->
+    <div class ="fullDay" id="fullDayRunReady" style="display:none; background-color:#037c05">
+    <p> You have selected to run a full day, nice! And you have already set everything up...</p>
+    <p>Start Time: <span id="startPerm"></span></p>
+    <p>End Time: <span id="endPerm"></span></p>
+    <p> Go ahead and select the date below! </p>
+    
+    </div>
+    <br>
+    <!--The date is included in everything-->
+    <label for="date">Enter the date: </label>
+    <input name="date" type="date" value="06/01/2018">
+    <br>
+    <br>
+    <input id="permuse" type="hidden" name="permuse" value="no">
+    <input type="button" class="blue update" name="goTime" value="Add Rows" onclick="google.script.run.addTimeSheet(addTimeForm)" /> &nbsp;
+    <input type="button" class="grey cancel" name="cancel" value="Cancel" onclick="google.script.host.close()" />
+    </div>
+    </div>
+    <input type="submit" style="display: none" />
+</form>
+
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!--this toggles the div box above to show the user the fullDay screen-->
+<script type="text/javascript">
+function runFullDay(){
+var x = document.getElementById("normalRun");
+var y = document.getElementById("fullDayRunFirstTime");
+var z = document.getElementById("fullDayRunReady");
+var P = document.getElementById("permuse");
+
+var yValue = document.getElementById("startPerm").innerHTML;
+
+    if (x.style.display === "none") {
+       if (yValue === "") {
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+       } else {
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+        }
+
+    } else {
+       if (yValue === "") {
+         x.style.display = "none";
+         y.style.display = "block";
+         z.style.display = "none";
+         P.value="no";
+       } else {
+         x.style.display = "none";
+         y.style.display = "none";
+         z.style.display = "block";
+         P.value="yes";
+        }
+    }
+}
+</script>
+<script>
+$(document).ready(function() {
+$('.my-class').delay(250).fadeIn(1000);
+
+
+});
+</script>
+
+</body> 
+</html>
