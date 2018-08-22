@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  </head>
+  <body>
+  <form id="addNewApp" target="_blank" onsubmit='return handleSubmit();'>
+  <div class="firstBox">
+  <p>What is the new application you would like to add?</p>
+  <input type="text" name="addAppText" value="" />
+  <br>
+  <br>
+  <input type="button" class="blue update" name="goTime" value="Update" onclick="google.script.run.addAppNew(addNewApp)" />
+  <input type="button" class="grey cancel" name="cancel" value="Cancel" onclick="google.script.host.close()" />
+  </div>
+  </form>
+
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body> 
+</html>
