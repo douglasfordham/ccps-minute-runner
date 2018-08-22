@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+      <head>
+        <base target="_top">
+        <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+      </head>
+      <body onload="onFirstGo()">
+      <form id="colorChoose" target="_blank" onsubmit='return handleSubmit();'>
+      <div class="firstBox">
+      <p>Select your color below, then choose to change the primary or alternating row.</p>
+      <div id="mainContainer">
+      </div>
+      <p>The color you have chosen is...</p>
+      <p id="demo">...</p>
+      <br>
+      <p>This will be my</p>
+      <input type="radio" name="colorChoice" value="E4"/><span style="color:#c6fffc;">First color</span><br>
+      <input type="radio" name="colorChoice" value="E5"/><span style="color:#c6fffc;">Second color</span><br>
+      <br>
+      <input type="button" class="blue update" name="goTime" value="Change Colors" onclick="google.script.run.updateDefaultColor(colorChoose)" />
+      <input type="button" class="grey cancel" name="cancel" value="Cancel" onclick="google.script.host.close()" />
+      </div>
+      </form>
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+function onFirstGo(){
+google.script.run
+        .withSuccessHandler(buildTheColors)
+        .allTheColors();
+}
+</script>
+
+<script>
+function updateInput(colorsDuke){
+
+   document.getElementById("demo").innerHTML = colorsDuke;
+}
+</script>
+
+<script>
+function buildTheColors(colors){
+
+   var toAdd = document.createElement("div");
+
+    for (var i = 0; i < colors.length; i++) {
+      var newDiv = document.createElement('div');
+      var newInput = document.createElement('input');
+      var newLabel = document.createElement('LABEL');
+
+        newDiv.className = 'radio-item';
+
+        newInput.type = "radio";
+        newInput.id = 'I'+colors[i][1];
+        newInput.name = "colorsman";
+        newInput.value = colors[i][0];
+        newInput.onclick = function() { updateInput(document.forms[0].colorsman.value); };
+
+        newLabel.style.backgroundColor = colors[i][2];
+        newLabel.setAttribute("for",'I'+colors[i][1]);
+
+        newDiv.appendChild(newInput);
+        newDiv.appendChild(newLabel);
+
+        toAdd.appendChild(newDiv);
+
+       }
+    document.getElementById('mainContainer').appendChild(toAdd);
+}
+</script>
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+</body>
+</html>
