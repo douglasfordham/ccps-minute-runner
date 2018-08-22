@@ -148,31 +148,6 @@ function checkImport() {
   var userInterface = HtmlService.createHtmlOutput(html);
    SpreadsheetApp.getUi().showModalDialog(userInterface, "Open Sheet");
  
-  
-  /*
-  var file = DriveApp.getFileById(ss.getId());
-  var folders = file.getParents().next().getId();
-  var destFolder = DriveApp.getFolderById(folders);
-  
-  
-  SpreadsheetApp.openById("abc1234567");
-  
-  
-  
-  
-  
-  
-  
-  var files = DriveApp.getRootFolder().searchFiles( 
-      searchFor);
-  Logger.log(files);
-   var file = files.next();
-   var id = file.getId();
-   Logger.log(id);
-  
-  
-  
-  */
 }
 
 
