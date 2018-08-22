@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
+  </head>
+  <body>
+ <form id="firstTimeForm" target="_blank" onsubmit='return handleSubmit();'>
+ <div class="firstBox">
+    <h3>Welcome to your first run!</h3>
+    <p>All we need is what school you work for.  After that, you are good to go! All of our little bugs
+    will take it from here. Make sure it is the same acronym that they use for their email! For instance,
+    Meadowbrook HS is "MBKHS_FAC@ccpsnet.net", so you would type in MBKHS.</p>
+   
+   
+    <label for="school">Enter your school acroynm below (ex: MBKHS)</label>
+    <input id="school" type="text" name="school" value="">
+    <br>
+    <br>
+    <input type="button" class="blue update" name="goTime" value="Run it!" onclick="google.script.run.runFirstSheet(firstTimeForm)" />
+    <input type="button" class="grey cancel" name="cancel" value="Cancel" onclick="google.script.host.close()" />
+  </div>
+</form>
+
+
+
+<!-- get jQuery /-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- get other javascript /-->
+
+<!--run serverside script /-->
+<script>
+  function handleSubmit() {
+    return false;
+  }
+</script>
+
+
+</body> 
+</html>
